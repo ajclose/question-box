@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   get 'register' => 'users#new', as: :registration
   post 'register' => 'users#create'
+
+  get 'users/:username' => 'users#show', as: :user
+
+  resources :questions
 end
