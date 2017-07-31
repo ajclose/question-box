@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
 
   def index
-    @questions = Question.all
+    @questions = Question.all.order(created_at: :desc).page params[:page]
     @question = Question.new
   end
 
@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new
     @question.title = params[:question][:title]
-    @question.body = params[:question][:title]
+    @question.body = params[:question][:body]
     @question.user_id = @current_user.id
     if @question.save
       redirect_to root_path
