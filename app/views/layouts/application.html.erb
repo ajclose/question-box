@@ -9,6 +9,16 @@
   </head>
 
   <body>
+    <header>
+      <h1>Code Questions</h1>
+      <nav>
+        <% if @current_user %>
+        <% else %>
+        <%= link_to "Login", login_path %>
+        <%= link_to "Sign Up", registration_path %>
+        <% end %>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
