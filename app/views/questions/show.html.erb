@@ -5,3 +5,12 @@
 
 
 <p><%= markdown.render(@question.body).html_safe %></p>
+
+<h3>Answer Question</h3>
+
+<%= render partial: '/answers/form' %>
+
+<h4>Answers: </h4>
+<% @question.answers.each do |answer| %>
+<p><%= answer.body %></p>
+<% end %>

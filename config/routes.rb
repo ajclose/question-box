@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   get 'users/:username' => 'users#show', as: :user
 
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 end

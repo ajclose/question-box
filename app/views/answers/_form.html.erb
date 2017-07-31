@@ -1,0 +1,9 @@
+<%= form_for([@question, @question.answers.build])  do |f| %>
+
+<div class="">
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+</div>
+
+<%= f.submit %>
+<% end %>
