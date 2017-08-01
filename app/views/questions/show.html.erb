@@ -11,12 +11,18 @@
 <%= render partial: '/answers/form' %>
 
 <h4>Answers: </h4>
-<% @question.answers.each do |answer| %>
-<% if answer.correct == true %>
-<p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= answer.body %></p>
-<% else %>
-<%= form_for([@question, answer]) do |f| %>
-<%= f.submit value: "Mark as correct"%>
+
+  <% @question.answers.each do |answer| %>
+  <% if answer.id != nil %>
+<div class="answer">
+  <p><%= answer.body %></p>
+    <% if answer.correct == true %>
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    <% else %>
+      <%= form_for([@question, answer]) do |f| %>
+      <%= f.submit value: "Mark as correct"%>
+      <% end %>
+    <% end %>
+</div>
 <% end %>
-<% end %>
-<% end %>
+  <% end %>
