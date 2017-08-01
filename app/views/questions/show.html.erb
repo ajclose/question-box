@@ -12,5 +12,11 @@
 
 <h4>Answers: </h4>
 <% @question.answers.each do |answer| %>
-<p><%= answer.body %></p>
+<% if answer.correct == true %>
+<p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= answer.body %></p>
+<% else %>
+<%= form_for([@question, answer]) do |f| %>
+<%= f.submit value: "Mark as correct"%>
+<% end %>
+<% end %>
 <% end %>

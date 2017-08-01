@@ -1,5 +1,9 @@
 class AnswersController < ApplicationController
 
+  def show
+
+  end
+
   def create
     @question = Question.find_by id: params[:question_id]
     @answer = Answer.new
@@ -9,5 +13,17 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to question_path(@question)
     end
+  end
+
+  def edit
+
+  end
+
+  def update
+    @question = Question.find_by id: params[:question_id]
+    @answer = Answer.find(params[:id])
+    @answer.correct = true
+    @answer.save
+    redirect_to question_path(@question)
   end
 end
