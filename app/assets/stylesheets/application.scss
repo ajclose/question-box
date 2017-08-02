@@ -38,4 +38,16 @@ header {
 
 .answer {
   display: flex;
+  flex-direction: column;
+  width: 50%;
+  .answer-body {
+    display: flex;
+    justify-content: flex-start;
+    span {
+      margin-right: 10px;
+    }
+    p {
+      align-self: center;
+    }
+  }
 }
