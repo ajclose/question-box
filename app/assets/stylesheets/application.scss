@@ -39,7 +39,10 @@ header {
 .answer {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 40%;
+  border: 2px solid black;
+  padding: 20px;
+  margin: 10px;
   .answer-body {
     display: flex;
     justify-content: flex-start;
@@ -50,4 +53,12 @@ header {
       align-self: center;
     }
   }
+}
+
+.question-display {
+  text-align: center;
+  border: 2px solid black;
+  margin: 10px;
+  width: 40%;
+  padding: 10px;
 }
