@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
     @question.user_id = @current_user.id
     if @question.save
       redirect_to root_path
+
     else
       render :new
     end
