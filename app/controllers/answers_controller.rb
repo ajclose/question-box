@@ -26,4 +26,11 @@ class AnswersController < ApplicationController
     @answer.save
     redirect_to question_path(@question)
   end
+
+  def destroy
+    @question = Question.find_by id: params[:question_id]
+    @answer = Answer.find(params[:id])
+    @answer.destroy
+    redirect_to question_path(@question)
+  end
 end

@@ -36,8 +36,12 @@ class Api::QuestionsController < Api::ApiController
 
   def destroy
     @question = Question.find_by id: params[:id]
-    @question.destroy
-    head :ok
+    if @question.user_id == @current_user.id
+      @question.destroy
+      head :ok
+    else
+      render json: {status: "unauthorized", message: "You are not authorized to perform that action"}, status: 401
+    end
   end
 
 end
