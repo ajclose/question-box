@@ -1,4 +1,8 @@
 <h3>questions!</h3>
+<%= form_tag(questions_path, method: :get) do %>
+<%= text_field_tag :search %>
+<%= submit_tag "Search" %>
+<% end %>
 
 <h4>Ask a question:</h4>
 <%= render partial: 'form' %>
@@ -12,6 +16,5 @@
   <% end %>
     </div>
   <% end %>
-
 
 <%= paginate @questions %>

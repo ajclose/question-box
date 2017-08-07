@@ -1,7 +1,11 @@
 class QuestionsController < ApplicationController
 
   def index
-    @questions = Question.all.order(created_at: :desc).page params[:page]
+    if params[:search].present?
+      @questions = Question.search_by_body(params[:search]).page params[:page]
+    else
+      @questions = Question.all.order(created_at: :desc).page params[:page]
+    end
     @question = Question.new
   end
 
