@@ -1,7 +1,10 @@
-<% if @question.user_id == @current_user.id %>
-<%= link_to "Edit", edit_question_path(@question) %>
-<%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you want to delete this question?"} %>
+<% if @current_user != nil %>
+  <% if @question.user_id == @current_user.id %>
+    <%= link_to "Edit", edit_question_path(@question) %>
+    <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you want to delete this question?"} %>
+  <% end %>
 <% end %>
+
 <div class="well">
   <h3><%= @question.title %></h3>
   <h4>Asked by:
@@ -9,12 +12,14 @@
     <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
 
     <p><%= markdown.render(@question.body).html_safe %></p>
-  </div>
-<% if @question.user_id != @current_user.id %>
-<h3>Answer Question</h3>
+</div>
+  <% if @current_user != nil %>
+    <% if @question.user_id != @current_user.id %>
+    <h3>Answer Question</h3>
 
-<%= render partial: '/answers/form' %>
-<% end %>
+    <%= render partial: '/answers/form' %>
+    <% end %>
+  <% end %>
 <h4>Answers:
 </h4>
 
@@ -27,17 +32,21 @@
         <% if answer.correct == true %>
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
         <% else %>
-          <% if @question.user_id == @current_user.id %>
-          <%= form_for([@question, answer]) do |f| %>
-          <%= f.submit value: "Mark as correct"%>
+          <% if @current_user != nil %>
+            <% if @question.user_id == @current_user.id %>
+            <%= form_for([@question, answer]) do |f| %>
+            <%= f.submit value: "Mark as correct"%>
+            <% end %>
           <% end %>
         <% end %>
         <% end %>
         <p><%= markdown.render(answer.body).html_safe %></p>
       </div>
     </div>
-    <% if answer.user_id == @current_user.id %>
-    <p><%= link_to 'Delete', question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure you want to delete this answer?"} %></p>
+    <% if @current_user != nil %>
+      <% if answer.user_id == @current_user.id %>
+      <p><%= link_to 'Delete', question_answer_path(@question, answer), method: :delete, data: {confirm: "Are you sure you want to delete this answer?"} %></p>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

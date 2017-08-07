@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
 
-  before_action do
+  before_action except: [:index, :show] do 
   if @current_user.blank?
     redirect_to login_path
   end
