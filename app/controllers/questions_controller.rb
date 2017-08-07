@@ -1,8 +1,14 @@
 class QuestionsController < ApplicationController
 
+  before_action do
+  if @current_user.blank?
+    redirect_to login_path
+  end
+end
+
   def index
     if params[:search].present?
-      @questions = Question.search_by_body(params[:search]).page params[:page]
+      @questions = Question.search_title_and_body(params[:search]).page params[:page]
     else
       @questions = Question.all.order(created_at: :desc).page params[:page]
     end
@@ -29,7 +35,6 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find_by id: params[:id]
   end
-
 
   def edit
     @question = Question.find_by id: params[:id]

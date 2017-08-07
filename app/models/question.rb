@@ -5,5 +5,5 @@ class Question < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
-  pg_search_scope :search_by_body, against: :body, using: {tsearch: {prefix: true}}
+  pg_search_scope :search_title_and_body, against: [:title, :body], using: {tsearch: {prefix: true}}
 end
